@@ -4,11 +4,11 @@ import cors from 'cors'
 import OpenAI from "openai";
 
 dotenv.config()
-console.log(process.env.OPENAI_API_KEY)
 
 const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY,
+  apiKey: process.env.OPENAI_API_KEY,
 });
+
 
 const app = express()
 app.use(cors())
@@ -25,14 +25,14 @@ app.post('/', async (req, res) => {
     const prompt = req.body.prompt;
 
     const response = await openai.completions.create({
-        model: "text-davinci-003",
-        prompt: `${prompt}`,
-        temperature: 1,
-        max_tokens: 256,
-        top_p: 1,
-        frequency_penalty: 0,
-        presence_penalty: 0,
-      });
+      model: "text-davinci-003",
+      prompt: `${prompt}`,
+      temperature: 1,
+      max_tokens: 256,
+      top_p: 1,
+      frequency_penalty: 0,
+      presence_penalty: 0,
+    });
 
     res.status(200).send({
       bot: response.data.choices[0].text
@@ -44,4 +44,4 @@ app.post('/', async (req, res) => {
   }
 })
 
-app.listen(4000, () => console.log('AI server started on http://localhost:4000'))
+app.listen(5000, () => console.log('AI server started on http://localhost:5000'))
